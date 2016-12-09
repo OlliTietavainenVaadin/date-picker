@@ -1,7 +1,8 @@
 {
   "name": "vaadin-date-picker-addon",
   "authors": [
-    "Artur Signell <artur@vaadin.com>"
+    "Artur Signell <artur@vaadin.com>",
+    "Olli Tietäväinen <ollit@vaadin.com>"
   ],
   "description": "",
   "main": "",
@@ -18,6 +19,7 @@
   "dependencies": {
     "vaadin-date-picker": "v1.2.0",
     "polymer": "1.7.0",
-    "vaadin-combo-box": "v1.1.5"
+    "vaadin-combo-box": "v1.1.5",
+    "paper-slider": "PolymerElements/paper-slider#~1.0.12"
   }
 }
