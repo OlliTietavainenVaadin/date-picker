@@ -1,12 +1,5 @@
 package org.vaadin.artur.datepicker.demo;
 
-import java.util.Locale;
-
-import javax.servlet.annotation.WebServlet;
-
-import org.vaadin.artur.combobox.ComboBox;
-import org.vaadin.artur.datepicker.DatePicker;
-
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -20,6 +13,12 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
+import org.vaadin.artur.combobox.ComboBox;
+import org.vaadin.artur.datepicker.DatePicker;
+import org.vaadin.ollit.paperslider.PaperSlider;
+
+import javax.servlet.annotation.WebServlet;
+import java.util.Locale;
 
 @Theme("demo")
 @Title("DatePicker Add-on Demo")
@@ -27,14 +26,9 @@ import com.vaadin.ui.UI;
 @Viewport("user-scalable=no,initial-scale=1.0")
 public class DatePickerDemoUI extends UI {
 
-    @WebServlet(value = "/*", asyncSupported = true)
-    @VaadinServletConfiguration(productionMode = false, ui = DatePickerDemoUI.class)
-    public static class Servlet extends VaadinServlet {
-    }
-
     @Override
     protected void init(VaadinRequest request) {
-        GridLayout gl = new GridLayout(2, 4);
+        GridLayout gl = new GridLayout(2, 5);
         gl.setSpacing(true);
         gl.setMargin(true);
         gl.setDefaultComponentAlignment(Alignment.BOTTOM_LEFT);
@@ -83,6 +77,12 @@ public class DatePickerDemoUI extends UI {
         localeSelect.setValue(new Locale("fi", "FI"));
         gl.addComponent(localeSelect);
 
+        PaperSlider paperSlider = new PaperSlider();
+        paperSlider.setValue(20.0d);
+        paperSlider.addValueChangeListener(event -> {
+            Notification.show("Slider value changed to " + event.getProperty().getValue());
+        });
+        gl.addComponent(paperSlider);
         setContent(gl);
     }
 
@@ -90,5 +90,10 @@ public class DatePickerDemoUI extends UI {
         Notification.show(
                 "datePicker value changed to " + e.getProperty().getValue());
 
+    }
+
+    @WebServlet(value = "/*", asyncSupported = true)
+    @VaadinServletConfiguration(productionMode = false, ui = DatePickerDemoUI.class)
+    public static class Servlet extends VaadinServlet {
     }
 }
